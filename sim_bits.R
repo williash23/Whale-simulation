@@ -39,6 +39,18 @@ rwcauchy <- function(n, mu = 0, rho = 0) {
   return(t)
 }
 
+probsel <- function(probrast, N){
+                                  x <- getValues(probrast)
+                                  x[is.na(x)] <- 0
+                                  vec_cells <- seq(1:length(probrast))
+                                  samp <- sample(vec_cells, ni, replace = T, prob=x)
+                                  samprast <- raster(probrast)
+                                  samprast[samp] <- 1 
+                                  samp_pts <- rasterToPoints(samprast, fun = function(x){x > 0})
+                                  samp_pts <- SpatialPoints(samp_pts)
+                                  crs(samp_pts) <- UTM
+                                  return(samp_pts)
+}
 ################################################################################
 
 # Make study area
@@ -83,40 +95,25 @@ crs(one_track_up) <- UTM
 #   These are placed initially within the area of the prediction grid of the DSM (so within 1 km on either side of ship route)
 #   Predcited abundance in that area: 20.22758, mean from iterations (mat_predgrid) 20.17342, sd 0.1281257
 #  Right now...whales are only placed within that small buffer around ship, and if they leave that buffer, they don't return.
-
 ni <- round(rnorm(1, 20.17342, 0.1281257))
 
 #### STEP 2 ####
 #  Place the number of initial whales (ni) in grid cells based on the predicted density of that cells used as probabilities
+#   Generate probability for each grid cell from relative predicted density
 sa <- predgrid_plot %>%
          dplyr::select(X, Y, Nhat) 
 sa_rast <- rasterFromXYZ(sa)
 probrast  <-sa_rast/sum(getValues(sa_rast), na.rm=T)
-
-mat <- as.matrix(probrast)
-vec_probs_tmp <- as.vector(mat)
-vec_cells_tmp <- seq(1:length(vec_probs_tmp))
-vec_mat_tmp <- cbind(vec_cells_tmp, vec_probs_tmp)
-vec_mat <- vec_mat_tmp[complete.cases(vec_mat_tmp[,2]),]
-vec_probs <- vec_mat[,2]
-vec_cells <- vec_mat[,1]
-
-init_locs <- base::sample(vec_cells, ni, replace = T, prob = vec_probs)
-
-samprast <- raster(probrast)
-samprast[init_locs] <- 1 
-init_pts <- rasterToPoints(samprast, fun=function(x){x>0})
-init_pts <- SpatialPoints(init_pts)
- crs(init_pts) <- UTM
-
-################################################################################
+#   Sample ni initial locations for whales using the relative probability of each grid cell
+init_locs <- probsel(probrast, ni)
 
 #  Plot
-ras <- probrast
+ras <- sa_rast
 plot(ras)
-plot(s, add=TRUE)
-plot(s_big, col = "dark green", add=TRUE)
-plot(one_track_up, add=TRUE)
+plot(s, add = TRUE)
+plot(s_big, col = "dark green", add = TRUE)
+plot(init_locs, pch = 1, col = "blue", add = TRUE)
+plot(one_track_up, add = TRUE)
 ################################################################################
 
 
@@ -287,6 +284,18 @@ whale_pth
                    # return(pts)
 # }
 
+
+
+#  My own attempt at writing the sampling and turing into spatial points
+# mat <- as.matrix(probrast)
+# vec_probs_tmp <- as.vector(mat)
+# vec_cells_tmp <- seq(1:length(vec_probs_tmp))
+# vec_mat_tmp <- cbind(vec_cells_tmp, vec_probs_tmp)
+# vec_mat <- vec_mat_tmp[complete.cases(vec_mat_tmp[,2]),]
+# vec_probs <- vec_mat[,2]
+# vec_cells <- vec_mat[,1]
+
+
 # for(i in 1:length(init_locs)){
   # row_init_locs[i] <- floor(init_locs[i]/ncol(mat))
   # col_init_locs[i] <- init_locs[i] - (row_init_locs[i]*ncol(mat))
@@ -299,6 +308,10 @@ whale_pth
       # }
     # }
 
+
+
+
+# init_locs <- base::sample(vec_cells, ni, replace = T, prob = vec_probs)
 
 
 # sa <- predgrid_plot %>%
