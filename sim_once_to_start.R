@@ -12,13 +12,12 @@ library(ggmcmc)
 library(gridExtra)
 library(ggthemes)
 library(CircStats)
-require(reshape2, quietly = TRUE)
+library(reshape)
 library(ggplot2)
 library(rjags)
 library(rgdal)
 library(raster)
 library(sp)
-library(rgeos)
 library(maptools)
 ################################################################################
 
@@ -159,7 +158,7 @@ dist_ship_move_per_surf_13k <- 6.68778*med_surface_int
 dist_ship_move_per_surf_20k <- 10.2889*med_surface_int
 
 num_ship_locs_up_13k <- floor(track_up_length/dist_ship_move_per_surf_13k)
-ship_locs_up_13k <- spsample(one_track_up, n = num_ship_locs_up_13k, type = "regular")
+ship_locs_up_13k <- sp::spsample(one_track_up, n = num_ship_locs_up_13k, type = "regular")
 ship_locs_up_df_13k_tmp1 <- as.data.frame(ship_locs_up_13k)
 ship_locs_up_df_13k_tmp2 <- ship_locs_up_df_13k_tmp1[-1,]
 ship_locs_up_df_13k_tmp3 <- ship_locs_up_df_13k_tmp2[-nrow(ship_locs_up_df_13k_tmp2),]
@@ -169,7 +168,7 @@ ship_locs_up_df_13k <- ship_locs_up_df_13k_tmp3 %>%
                                         mutate(loc_num = 1:n())
 
 num_ship_locs_down_13k <- floor(track_down_length/dist_ship_move_per_surf_13k)
-ship_locs_down_13k <- spsample(one_track_down, n = num_ship_locs_down_13k, type = "regular")
+ship_locs_down_13k <- sp::spsample(one_track_down, n = num_ship_locs_down_13k, type = "regular")
 ship_locs_down_df_13k_tmp1 <- as.data.frame(ship_locs_down_13k)
 ship_locs_down_df_13k_tmp2 <- ship_locs_down_df_13k_tmp1[-1,]
 ship_locs_down_df_13k_tmp3 <- ship_locs_down_df_13k_tmp2[-nrow(ship_locs_down_df_13k_tmp2),]
@@ -180,7 +179,7 @@ ship_locs_down_df_13k <- ship_locs_down_df_13k_tmp3 %>%
                                             mutate(loc_num = 1:n())
 
 num_ship_locs_up_20k <- floor(track_up_length/dist_ship_move_per_surf_20k)
-ship_locs_up_20k <- spsample(one_track_up, n = num_ship_locs_up_20k, type = "regular")
+ship_locs_up_20k <- sp::spsample(one_track_up, n = num_ship_locs_up_20k, type = "regular")
 ship_locs_up_df_20k_tmp1 <- as.data.frame(ship_locs_up_20k)
 ship_locs_up_df_20k_tmp2 <- ship_locs_up_df_20k_tmp1[-1,]
 ship_locs_up_df_20k_tmp3 <- ship_locs_up_df_20k_tmp2[-nrow(ship_locs_up_df_20k_tmp2),]
@@ -190,7 +189,7 @@ ship_locs_up_df_20k <- ship_locs_up_df_20k_tmp3 %>%
                                         mutate(loc_num = 1:n())
 
 num_ship_locs_down_20k <- floor(track_down_length/dist_ship_move_per_surf_20k)
-ship_locs_down_20k <- spsample(one_track_down, n = num_ship_locs_down_20k, type = "regular")
+ship_locs_down_20k <- sp::spsample(one_track_down, n = num_ship_locs_down_20k, type = "regular")
 ship_locs_down_df_20k_tmp1 <- as.data.frame(ship_locs_down_20k)
 ship_locs_down_df_20k_tmp2 <- ship_locs_down_df_20k_tmp1[-1,]
 ship_locs_down_df_20k_tmp3 <- ship_locs_down_df_20k_tmp2[-nrow(ship_locs_down_df_20k_tmp2),]

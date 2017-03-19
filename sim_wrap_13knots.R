@@ -133,13 +133,13 @@ sim_ship_strike_fun <- function(mod, strike_dist){
             #### STEP 6 ####
             #  Count overlaps within certain distance!!!!
             sim_strikes_up <- df_XYboth_up %>%
-                                          mutate(X_overlap = ifelse((abs(X_whale - X_ship)) <= strike_dist, 1, 0)) %>%
-                                          mutate(Y_overlap = ifelse((abs(Y_whale - Y_ship)) <= strike_dist, 1, 0)) %>%
+                                          mutate(X_overlap = ifelse((abs(X_whale - X_ship)) < strike_dist, 1, 0)) %>%
+                                          mutate(Y_overlap = ifelse((abs(Y_whale - Y_ship)) < strike_dist, 1, 0)) %>%
                                           mutate(sim_strike = ifelse(X_overlap == 1 & Y_overlap == 1, 1, 0))
 
             sim_strikes_down <- df_XYboth_down %>%
-                                              mutate(X_overlap = ifelse((abs(X_whale - X_ship)) <= strike_dist, 1, 0)) %>%
-                                              mutate(Y_overlap = ifelse((abs(Y_whale - Y_ship)) <= strike_dist, 1, 0)) %>%
+                                              mutate(X_overlap = ifelse((abs(X_whale - X_ship)) < strike_dist, 1, 0)) %>%
+                                              mutate(Y_overlap = ifelse((abs(Y_whale - Y_ship)) < strike_dist, 1, 0)) %>%
                                               mutate(sim_strike = ifelse(X_overlap == 1 & Y_overlap == 1, 1, 0))
 
             tot_sim_strikes_up <- sum(sim_strikes_up$sim_strike, na.rm = T)
