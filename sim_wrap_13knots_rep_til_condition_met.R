@@ -1,15 +1,22 @@
 # Sara Williams
 # 3/18/2017
-# Whale ship strike risk simulation - function to run simulaiton for 13 knot ship speed
+# Whale ship strike risk simulation - function to run simulaiton for 13 knot ship speed until 
+#   certain condition (eg, 1 ship strike) is met
 #   Have to load script: sim_once_to_start.R before running this one
 ################################################################################
 
-# Looming question of unreported whale strikes??? In this system it porbably isn't an issue 
-#   (supported by the evidence of historical collisions)
 
-
-sim_ship_strike_fun <- function(mod, strike_dist){
-
+while(TRUE){
+    sim_ship_strike_fun(mod = post_sims, strike_dist = 100)
+      if(tot_sim_strikes > 0) break
+    }
+       
+       
+       
+       
+       
+      sim_ship_strike_fun_cond <- function(mod, strike_dist){
+# repeat {
             #### STEP 1 ####
             #  Start out with a number of whales in the area of the ship route 
             #   These are placed initially within the area of the prediction grid of the DSM (so within 1 km on either side of ship route)
@@ -77,9 +84,9 @@ sim_ship_strike_fun <- function(mod, strike_dist){
             names(df_XYwhales_up_tmp) <- c("whale_ind_num", "X_whale", "walk_num_rep", "Y_whale", "loc_num_whale")
             df_XYwhales_up <- df_XYwhales_up_tmp %>%
                                             dplyr::select(whale_ind_num, loc_num_whale, X_whale, Y_whale) %>%
+                                            mutate(model = "Single State") %>%
                                             arrange(loc_num_whale)
 
-            #  Generate CRW from simulated steps and turns for movement UP bay for 13k speed restriction
             #   Matrices to hold simulations for whale movement DOWN bay 13k
             mat_X_down <- matrix(nrow = nobs_whale_down_13k, ncol = ni)
             mat_Y_down <- matrix(nrow = nobs_whale_down_13k, ncol = ni)
@@ -113,8 +120,9 @@ sim_ship_strike_fun <- function(mod, strike_dist){
             names(df_XYwhales_down_tmp) <- c("whale_ind_num", "X_whale", "walk_num_rep", "Y_whale", "loc_num_whale")
             df_XYwhales_down <- df_XYwhales_down_tmp %>%
                                                 dplyr::select(whale_ind_num, loc_num_whale, X_whale, Y_whale) %>%
+                                                mutate(model = "Single State") %>%
                                                 arrange(loc_num_whale)
-           ################################################################################
+################################################################################
 
 
             #### STEP 5 ####
@@ -146,6 +154,9 @@ sim_ship_strike_fun <- function(mod, strike_dist){
 
             tot_sim_strikes <- tot_sim_strikes_up + tot_sim_strikes_down
             return(tot_sim_strikes)
-}
+            }
+         if(tot_sim_strikes > 0) break
+     }
+
 ################################################################################
 
