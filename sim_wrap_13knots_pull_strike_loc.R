@@ -1,5 +1,5 @@
 # Sara Williams
-# 3/18/2017
+# 3/21/2017
 # Whale ship strike risk simulation - function to run simulaiton for 13 knot ship speed
 #   Have to load script: sim_once_to_start.R before running this one
 ################################################################################
@@ -8,8 +8,7 @@
 #   (supported by the evidence of historical collisions)
 
 
-sim_ship_strike_fun_13k <- function(mod, strike_dist){
-
+sim_ship_strike_fun_13k_loc <- function(mod, strike_dist){
             #### STEP 1 ####
             #  Start out with a number of whales in the area of the ship route - determined in function call
             #   These are placed initially within the area of the prediction grid of the DSM (so within 1 km on either side of ship route)
@@ -147,18 +146,19 @@ sim_ship_strike_fun_13k <- function(mod, strike_dist){
             sim_strikes_up <- df_XYboth_up %>%
                                           mutate(dist_btw_strike = raster::pointDistance(cbind(X_whale, Y_whale), 
                                                                                                                         cbind(X_ship, Y_ship), longlat = FALSE)) %>%
-                                          mutate(sim_strike = ifelse(dist_btw_strike <= strike_dist, 1, 0))
+                                          mutate(sim_strike = ifelse(dist_btw_strike <= strike_dist, 1, 0)) %>%
+                                          dplyr::filter(sim_strike==1) %>%
+                                          dplyr::select(X_whale, Y_whale, sim_strike)
 
              sim_strikes_down <- df_XYboth_down %>%
                                                 mutate(dist_btw_strike = raster::pointDistance(cbind(X_whale, Y_whale), 
                                                                                                                               cbind(X_ship, Y_ship), longlat = FALSE)) %>%
-                                                mutate(sim_strike = ifelse(dist_btw_strike <= strike_dist, 1, 0))
-
-            tot_sim_strikes_up <- sum(sim_strikes_up$sim_strike, na.rm = T)
-            tot_sim_strikes_down <- sum(sim_strikes_down$sim_strike, na.rm = T)
-
-            tot_sim_strikes <- tot_sim_strikes_up + tot_sim_strikes_down
-            return(tot_sim_strikes)
+                                                mutate(sim_strike = ifelse(dist_btw_strike <= strike_dist, 1, 0)) %>%
+                                          dplyr::filter(sim_strike==1) %>%
+                                          dplyr::select(X_whale, Y_whale, sim_strike)
+            
+            strike_locs <- as.data.frame(bind_rows(sim_strikes_up, sim_strikes_down))
+            return(strike_locs)
 }
 ################################################################################
 #################################################################################

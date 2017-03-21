@@ -15,6 +15,7 @@ library(CircStats)
 library(reshape)
 library(ggplot2)
 library(rjags)
+library(rgeos)
 library(rgdal)
 library(raster)
 library(sp)
@@ -41,22 +42,6 @@ rwcauchy <- function(n, mu = 0, rho = 0) {
   t <- (sign(runif(n) - 0.5) * acos((V + c)/(1 + c * V)) + mu)%%(2 * pi)
   return(t)
 }
-
-probsel <- function(probrast, N){
-                                  x <- getValues(probrast)
-                                  x[is.na(x)] <- 0
-                                  vec_cells <- seq(1:length(probrast))
-                                  samp <- sample(vec_cells, ni, replace = T, prob=x)
-                                  samprast <- raster(probrast)
-                                  samprast[samp] <- 1 
-                                  samp_pts <- rasterToPoints(samprast, fun = function(x){x > 0})
-                                  samp_pts <- SpatialPoints(samp_pts)
-                                  crs(samp_pts) <- UTM
-                                  return(samp_pts)
-}
-################################################################################
-
-
 
 #   Generate probability for each grid cell from relative predicted density
 sa <- predgrid_plot %>%
@@ -230,4 +215,5 @@ for(i in 1:nrow(sims)){
  }
 post_sims <- as.data.frame(cbind(steps, turns))
 post_sims$turns[post_sims$turns>pi]=post_sims$turns[post_sims$turns>pi]-2*pi
+################################################################################
 ################################################################################

@@ -7,14 +7,9 @@
 #  Load packages
 library(plyr)
 library(dplyr)
-library(packcircles)
-library(ggmcmc)
-library(gridExtra)
+llibrary(gridExtra)
 library(ggthemes)
-library(CircStats)
-library(reshape)
 library(ggplot2)
-library(rjags)
 library(rgdal)
 library(raster)
 library(sp)
@@ -77,21 +72,6 @@ one_whale_pth
 #### same movement parameters for each whale, or based on behavior?
 
 #### If whales move out of study area, let them keep moving around - they can come back in our stay out.
-sim_100k_df <- as.data.frame(rep_sim_strikes_100k_sims) %>%
-                          dplyr::rename(strikes = rep_sim_strikes_100k_sims)
-sim_100k_p <- ggplot(data=sim_100k_df, aes(sim_100k_df$strikes)) +
-                         geom_density(size = 1.25) +
-                         geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +
-                         xlab("\n Number of 50m encounters over 100k iterations") +
-                         ylab("Density \n") +
-                         #xlim(c(0, 5)) +
-                         #ylim(c(0, 2.5)) +
-                         theme_bw() +
-                         theme(panel.grid.minor = element_blank(), panel.grid.major.y = element_blank(), 
-                         axis.text = element_text(size = rel(2)), axis.title = element_text(size = rel(2))) 
-                         #theme(legend.position="none")
-sim_100k_p
-
 reach_1_strike_50m_df <- as.data.frame(reach_1_strike_50m) %>%
                                              dplyr::rename(strikes = reach_1_strike_50m)
 reach_1_strike_50m_p <- ggplot(data=reach_1_strike_50m_df, aes(reach_1_strike_50m_df$strikes)) +
@@ -106,3 +86,8 @@ reach_1_strike_50m_p <- ggplot(data=reach_1_strike_50m_df, aes(reach_1_strike_50
                                            axis.text = element_text(size = rel(2)), axis.title = element_text(size = rel(2))) 
                                            #theme(legend.position="none")
 reach_1_strike_50m_p
+
+
+
+#################################################################################
+#################################################################################

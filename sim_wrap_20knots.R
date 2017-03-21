@@ -1,6 +1,6 @@
 # Sara Williams
 # 3/18/2017
-# Whale ship strike risk simulation - function to run simulaiton for 13 knot ship speed
+# Whale ship strike risk simulation - function to run simulaiton for 20 knot ship speed
 #   Have to load script: sim_once_to_start.R before running this one
 ################################################################################
 
@@ -8,7 +8,7 @@
 #   (supported by the evidence of historical collisions)
 
 
-sim_ship_strike_fun_13k <- function(mod, strike_dist){
+sim_ship_strike_fun_20k <- function(mod, strike_dist){
 
             #### STEP 1 ####
             #  Start out with a number of whales in the area of the ship route - determined in function call
@@ -56,13 +56,13 @@ sim_ship_strike_fun_13k <- function(mod, strike_dist){
             #### STEP 4 ####
 
 
-            #  Generate CRW from simulated steps and turns for movement UP bay for 13k speed restriction
-            #   Matrices to hold simulations for whale movement UP bay 13k
-            mat_X_up <- matrix(nrow = nobs_whale_up_13k, ncol = ni)
-            mat_Y_up <- matrix(nrow = nobs_whale_up_13k, ncol = ni)
+            #  Generate CRW from simulated steps and turns for movement UP bay for 20k speed restriction
+            #   Matrices to hold simulations for whale movement UP bay 20k
+            mat_X_up <- matrix(nrow = nobs_whale_up_20k, ncol = ni)
+            mat_Y_up <- matrix(nrow = nobs_whale_up_20k, ncol = ni)
 
             for(j in 1:ni){
-                 keep <- sample(1:nrow(mod), nobs_whale_up_13k, replace = FALSE)
+                 keep <- sample(1:nrow(mod), nobs_whale_up_20k, replace = FALSE)
                  # make distributed steps
                  steps_sim <- mod[keep, 1]
                  # make clustered turning angles
@@ -86,19 +86,19 @@ sim_ship_strike_fun_13k <- function(mod, strike_dist){
             df_Y_up_tmp <- as.data.frame(mat_Y_up)
             df_X_up <- melt(df_X_up_tmp)
             df_Y_up <- melt(df_Y_up_tmp)
-            df_XYwhales_up_tmp <- cbind(df_X_up, df_Y_up, rep(1:nobs_whale_up_13k))
+            df_XYwhales_up_tmp <- cbind(df_X_up, df_Y_up, rep(1:nobs_whale_up_20k))
             names(df_XYwhales_up_tmp) <- c("whale_ind_num", "X_whale", "walk_num_rep", "Y_whale", "loc_num_whale")
             df_XYwhales_up <- df_XYwhales_up_tmp %>%
                                             dplyr::select(whale_ind_num, loc_num_whale, X_whale, Y_whale) %>%
                                             arrange(loc_num_whale)
 
-            #  Generate CRW from simulated steps and turns for movement UP bay for 13k speed restriction
-            #   Matrices to hold simulations for whale movement DOWN bay 13k
-            mat_X_down <- matrix(nrow = nobs_whale_down_13k, ncol = ni)
-            mat_Y_down <- matrix(nrow = nobs_whale_down_13k, ncol = ni)
+            #  Generate CRW from simulated steps and turns for movement UP bay for 20k speed restriction
+            #   Matrices to hold simulations for whale movement DOWN bay 20k
+            mat_X_down <- matrix(nrow = nobs_whale_down_20k, ncol = ni)
+            mat_Y_down <- matrix(nrow = nobs_whale_down_20k, ncol = ni)
 
             for(k in 1:ni){
-                 keep <- sample(1:nrow(mod), nobs_whale_down_13k, replace = FALSE)
+                 keep <- sample(1:nrow(mod), nobs_whale_down_20k, replace = FALSE)
                  # make distributed steps
                  steps_sim <- mod[keep, 1]
                  # make clustered turning angles
@@ -122,7 +122,7 @@ sim_ship_strike_fun_13k <- function(mod, strike_dist){
             df_Y_down_tmp <- as.data.frame(mat_Y_down)
             df_X_down <- melt(df_X_down_tmp)
             df_Y_down <- melt(df_Y_down_tmp)
-            df_XYwhales_down_tmp <- cbind(df_X_down, df_Y_down, rep(1:nobs_whale_down_13k))
+            df_XYwhales_down_tmp <- cbind(df_X_down, df_Y_down, rep(1:nobs_whale_down_20k))
             names(df_XYwhales_down_tmp) <- c("whale_ind_num", "X_whale", "walk_num_rep", "Y_whale", "loc_num_whale")
             df_XYwhales_down <- df_XYwhales_down_tmp %>%
                                                 dplyr::select(whale_ind_num, loc_num_whale, X_whale, Y_whale) %>%
@@ -132,11 +132,11 @@ sim_ship_strike_fun_13k <- function(mod, strike_dist){
 
             #### STEP 5 ####
             #  Combine whale movement and ship movement
-            df_XYship_up <- ship_locs_up_df_13k[rep(1:nrow(ship_locs_up_df_13k),each=(ni)),] 
+            df_XYship_up <- ship_locs_up_df_20k[rep(1:nrow(ship_locs_up_df_20k),each=(ni)),] 
             df_XYboth_up <- cbind(df_XYwhales_up, df_XYship_up) %>%
                                         dplyr::rename(X_ship = long, Y_ship = lat, loc_num_ship = loc_num)
 
-            df_XYship_down <- ship_locs_down_df_13k[rep(1:nrow(ship_locs_down_df_13k),each=(ni)),] 
+            df_XYship_down <- ship_locs_down_df_20k[rep(1:nrow(ship_locs_down_df_20k),each=(ni)),] 
             df_XYboth_down <- cbind(df_XYwhales_down, df_XYship_down) %>%
                                              dplyr::rename(X_ship = long, Y_ship = lat, loc_num_ship = loc_num)
             ################################################################################
