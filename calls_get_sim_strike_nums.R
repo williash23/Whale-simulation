@@ -4,266 +4,231 @@
 #  distance limits and over different period lengths (number of years)
 #   Have to load scripts: sim_once_to_start.R and sim_wrap-... before running this one
 ################################################################################
+setwd("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output")
+
+
+#### 13k speed ####
+
 
 #  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
-nrep <- 275 #ships per year - 275
-niter <- 100 # number of years
+nrep <- 275 #ships per year - 275 * # number of years
 
-#  10m; 13k ship speed
-rep_sim_strikes_10m_13k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_10m_13k <- as.vector(rep(0, niter))
+rep_sim_strikes_10m_13k_1yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_13k_1yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_13k_1yr <- as.vector(rep(NA, nrep))
 
-for(j in 1:niter){
   for(i in 1:nrep){
-    rep_sim_strikes_10m_13k[i] <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 10)
+    rep_sim_strikes_10m_13k_1yr[i] <- sim_ship_strike_fun_13k(strike_dist = 10)
+    rep_sim_strikes_25m_13k_1yr[i] <- sim_ship_strike_fun_13k(strike_dist = 25)
+    rep_sim_strikes_50m_13k_1yr[i] <- sim_ship_strike_fun_13k(strike_dist = 50)
     }
-  prop_strikes_per_year_10m_13k[j] <- sum(rep_sim_strikes_10m_13k)/nrep
-}
 
-#  10m; 20k ship speed
-rep_sim_strikes_10m_20k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_10m_20k <- as.vector(rep(0, niter))
 
-for(j in 1:niter){
+#  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
+nrep <- 2750  #ships per year - 275 * 10 # number of years
+rep_sim_strikes_10m_13k_10yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_13k_10yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_13k_10yr <- as.vector(rep(NA, nrep))
+
   for(i in 1:nrep){
-    rep_sim_strikes_10m_20k[i] <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 10)
+    rep_sim_strikes_10m_13k_10yr[i] <- sim_ship_strike_fun_13k(strike_dist = 10)
+    rep_sim_strikes_25m_13k_10yr[i] <- sim_ship_strike_fun_13k(strike_dist = 25)
+    rep_sim_strikes_50m_13k_10yr[i] <- sim_ship_strike_fun_13k(strike_dist = 50)
     }
-  prop_strikes_per_year_10m_20k[j] <- sum(rep_sim_strikes_10m_20k)/nrep
-}
 
-#  25m; 13k ship speed
-rep_sim_strikes_25m_13k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_25m_13k <- as.vector(rep(0, niter))
 
-for(j in 1:niter){
+#  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
+nrep <- 13750 #ships per year - 275 * 50 # number of years
+rep_sim_strikes_10m_13k_50yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_13k_50yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_13k_50yr <- as.vector(rep(NA, nrep))
+
   for(i in 1:nrep){
-    rep_sim_strikes_25m_13k[i] <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 25)
+    rep_sim_strikes_10m_13k_50yr[i] <- sim_ship_strike_fun_13k(strike_dist = 10)
+    rep_sim_strikes_25m_13k_50yr[i] <- sim_ship_strike_fun_13k(strike_dist = 25)
+    rep_sim_strikes_50m_13k_50yr[i] <- sim_ship_strike_fun_13k(strike_dist = 50)
     }
-  prop_strikes_per_year_25m_13k[j] <- sum(rep_sim_strikes_25m_13k)/nrep
-}
+ 
 
-#  25m; 20k ship speed
-rep_sim_strikes_25m_20k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_25m_20k <- as.vector(rep(0, niter))
+ 
+ 
+ #### 20k speed ####
 
-for(j in 1:niter){
+
+#  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
+nrep <- 275 #ships per year - 275 * 1 # number of years
+
+rep_sim_strikes_10m_20k_1yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_20k_1yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_20k_1yr <- as.vector(rep(NA, nrep))
+
   for(i in 1:nrep){
-    rep_sim_strikes_25m_20k[i] <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 25)
+    rep_sim_strikes_10m_20k_1yr[i] <- sim_ship_strike_fun_20k(strike_dist = 10)
+    rep_sim_strikes_25m_20k_1yr[i] <- sim_ship_strike_fun_20k(strike_dist = 25)
+    rep_sim_strikes_50m_20k_1yr[i] <- sim_ship_strike_fun_20k(strike_dist = 50)
     }
-  prop_strikes_per_year_25m_20k[j] <- sum(rep_sim_strikes_25m_20k)/nrep
-}
+ 
+ 
+ #  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
+nrep <- 2750 #ships per year - 275* 10 # number of years
 
-#  50m; 13k ship speed
-rep_sim_strikes_50m_13k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_50m_13k <- as.vector(rep(0, niter))
+rep_sim_strikes_10m_20k_10yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_20k_10yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_20k_10yr <- as.vector(rep(NA, nrep))
 
-for(j in 1:niter){
   for(i in 1:nrep){
-    rep_sim_strikes_50m_13k[i] <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 50)
+    rep_sim_strikes_10m_20k_10yr[i] <- sim_ship_strike_fun_20k(strike_dist = 10)
+    rep_sim_strikes_25m_20k_10yr[i] <- sim_ship_strike_fun_20k(strike_dist = 25)
+    rep_sim_strikes_50m_20k_10yr[i] <- sim_ship_strike_fun_20k(strike_dist = 50)
     }
-  prop_strikes_per_year_50m_13k[j] <- sum(rep_sim_strikes_50m_13k)/nrep
-}
 
-#  50m; 20k ship speed
-rep_sim_strikes_50m_20k <- as.vector(rep(0, nrep))
-prop_strikes_per_year_50m_20k <- as.vector(rep(0, niter))
 
-for(j in 1:niter){
+  #  Iterations over number of ships (nrep = 1 up and down bay) per year and number of years 
+nrep <- 13750 #ships per year - 275*50 # number of years
+
+rep_sim_strikes_10m_20k_50yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_25m_20k_50yr <- as.vector(rep(NA, nrep))
+rep_sim_strikes_50m_20k_50yr <- as.vector(rep(NA, nrep))
+
   for(i in 1:nrep){
-    rep_sim_strikes_50m_20k[i] <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 50)
+    rep_sim_strikes_10m_20k_50yr[i] <- sim_ship_strike_fun_20k(strike_dist = 10)
+    rep_sim_strikes_25m_20k_50yr[i] <- sim_ship_strike_fun_20k(strike_dist = 25)
+    rep_sim_strikes_50m_20k_50yr[i] <- sim_ship_strike_fun_20k(strike_dist = 50)
     }
-  prop_strikes_per_year_50m_20k[j] <- sum(rep_sim_strikes_50m_20k)/nrep
- }
 ################################################################################
 
 
-#   Save simulations for 10 year period
-# rep_sim_strikes_10m_13k_10y <- rep_sim_strikes_10m_13k
-# rep_sim_strikes_10m_20k_10y <- rep_sim_strikes_10m_20k
-# rep_sim_strikes_25m_13k_10y <- rep_sim_strikes_25m_13k
-# rep_sim_strikes_25m_20k_10y <- rep_sim_strikes_25m_20k
-# rep_sim_strikes_50m_13k_10y <- rep_sim_strikes_50m_13k
-# rep_sim_strikes_50m_20k_10y <- rep_sim_strikes_50m_20k
-
-# prop_strikes_per_year_10m_13k_10y <- prop_strikes_per_year_10m_13k
-# prop_strikes_per_year_10m_20k_10y <- prop_strikes_per_year_10m_20k
-# prop_strikes_per_year_25m_13k_10y <- prop_strikes_per_year_25m_13k
-# prop_strikes_per_year_25m_20k_10y <- prop_strikes_per_year_25m_20k
-# prop_strikes_per_year_50m_13k_10y <- prop_strikes_per_year_50m_13k
-# prop_strikes_per_year_50m_20k_10y <- prop_strikes_per_year_50m_20k
+save(rep_sim_strikes_10m_13k_1yr, file = "rep_sim_strikes_10m_13k_1yr.RData") 
+save(rep_sim_strikes_25m_13k_1yr, file = "rep_sim_strikes_25m_13k_1yr.RData") 
+save(rep_sim_strikes_50m_13k_1yr, file = "rep_sim_strikes_50m_13k_1yr.RData") 
+save(rep_sim_strikes_10m_13k_10yr, file = "rep_sim_strikes_10m_13k_10yr.RData") 
+save(rep_sim_strikes_25m_13k_10yr, file = "rep_sim_strikes_25m_13k_10yr.RData") 
+save(rep_sim_strikes_50m_13k_10yr, file = "rep_sim_strikes_50m_13k_10yr.RData") 
+save(rep_sim_strikes_10m_13k_50yr, file = "rep_sim_strikes_10m_13k_50yr.RData") 
+save(rep_sim_strikes_25m_13k_50yr, file = "rep_sim_strikes_25m_13k_50yr.RData") 
+save(rep_sim_strikes_50m_13k_50yr, file = "rep_sim_strikes_50m_13k_50yr.RData") 
 
 
-#   Save simulations for 50 year period
-# rep_sim_strikes_10m_13k_50y <- rep_sim_strikes_10m_13k
-# rep_sim_strikes_10m_20k_50y <- rep_sim_strikes_10m_20k
-# rep_sim_strikes_25m_13k_50y <- rep_sim_strikes_25m_13k
-# rep_sim_strikes_25m_20k_50y <- rep_sim_strikes_25m_20k
-# rep_sim_strikes_50m_13k_50y <- rep_sim_strikes_50m_13k
-# rep_sim_strikes_50m_20k_50y <- rep_sim_strikes_50m_20k
-
-# prop_strikes_per_year_10m_13k_50y <- prop_strikes_per_year_10m_13k
-# prop_strikes_per_year_10m_20k_50y <- prop_strikes_per_year_10m_20k
-# prop_strikes_per_year_25m_13k_50y <- prop_strikes_per_year_25m_13k
-# prop_strikes_per_year_25m_20k_50y <- prop_strikes_per_year_25m_20k
-# prop_strikes_per_year_50m_13k_50y <- prop_strikes_per_year_50m_13k
-# prop_strikes_per_year_50m_20k_50y <- prop_strikes_per_year_50m_20k
-
-
-# #   Save simulations for 100 year period
-# rep_sim_strikes_10m_13k_100y <- rep_sim_strikes_10m_13k
-# rep_sim_strikes_10m_20k_100y <- rep_sim_strikes_10m_20k
-# rep_sim_strikes_25m_13k_100y <- rep_sim_strikes_25m_13k
-# rep_sim_strikes_25m_20k_100y <- rep_sim_strikes_25m_20k
-# rep_sim_strikes_50m_13k_100y <- rep_sim_strikes_50m_13k
-# rep_sim_strikes_50m_20k_100y <- rep_sim_strikes_50m_20k
-
-# prop_strikes_per_year_10m_13k_100y <- prop_strikes_per_year_10m_13k
-# prop_strikes_per_year_10m_20k_100y <- prop_strikes_per_year_10m_20k
-# prop_strikes_per_year_25m_13k_100y <- prop_strikes_per_year_25m_13k
-# prop_strikes_per_year_25m_20k_100y <- prop_strikes_per_year_25m_20k
-# prop_strikes_per_year_50m_13k_100y <- prop_strikes_per_year_50m_13k
-# prop_strikes_per_year_50m_20k_100y <- prop_strikes_per_year_50m_20k
-# ################################################################################
-
-
-# save(rep_sim_strikes_10m_13k_10y, file = "rep_sim_strikes_10m_13k_10y.RData") 
-# save(rep_sim_strikes_25m_13k_10y, file = "rep_sim_strikes_25m_13k_10y.RData") 
-# save(rep_sim_strikes_50m_13k_10y, file = "rep_sim_strikes_50m_13k_10y.RData") 
-# save(rep_sim_strikes_10m_20k_10y, file = "rep_sim_strikes_10m_20k_10y.RData") 
-# save(rep_sim_strikes_25m_20k_10y, file = "rep_sim_strikes_25m_20k_10y.RData") 
-# save(rep_sim_strikes_50m_20k_10y, file = "rep_sim_strikes_50m_20k_10y.RData") 
-
-# save(prop_strikes_per_year_10m_13k_10y, file = "prop_strikes_per_year_10m_13k_10y.RData") 
-# save(prop_strikes_per_year_25m_13k_10y, file = "prop_strikes_per_year_25m_13k_10y.RData") 
-# save(prop_strikes_per_year_50m_13k_10y, file = "prop_strikes_per_year_50m_13k_10y.RData") 
-# save(prop_strikes_per_year_10m_20k_10y, file = "prop_strikes_per_year_10m_20k_10y.RData") 
-# save(prop_strikes_per_year_25m_20k_10y, file = "prop_strikes_per_year_25m_20k_10y.RData") 
-# save(prop_strikes_per_year_50m_20k_10y, file = "prop_strikes_per_year_50m_20k_10y.RData") 
-
-# save(rep_sim_strikes_10m_13k_50y, file = "rep_sim_strikes_10m_13k_50y.RData") 
-# save(rep_sim_strikes_25m_13k_50y, file = "rep_sim_strikes_25m_13k_50y.RData") 
-# save(rep_sim_strikes_50m_13k_50y, file = "rep_sim_strikes_50m_13k_50y.RData") 
-# save(rep_sim_strikes_10m_20k_50y, file = "rep_sim_strikes_10m_20k_50y.RData") 
-# save(rep_sim_strikes_25m_20k_50y, file = "rep_sim_strikes_25m_20k_50y.RData") 
-# save(rep_sim_strikes_50m_20k_50y, file = "rep_sim_strikes_50m_20k_50y.RData") 
-
-# save(prop_strikes_per_year_10m_13k_50y, file = "prop_strikes_per_year_10m_13k_50y.RData") 
-# save(prop_strikes_per_year_25m_13k_50y, file = "prop_strikes_per_year_25m_13k_50y.RData") 
-# save(prop_strikes_per_year_50m_13k_50y, file = "prop_strikes_per_year_50m_13k_50y.RData") 
-# save(prop_strikes_per_year_10m_20k_50y, file = "prop_strikes_per_year_10m_20k_50y.RData") 
-# save(prop_strikes_per_year_25m_20k_50y, file = "prop_strikes_per_year_25m_20k_50y.RData") 
-# save(prop_strikes_per_year_50m_20k_50y, file = "prop_strikes_per_year_50m_20k_50y.RData") 
-
-# save(rep_sim_strikes_10m_13k_100y, file = "rep_sim_strikes_10m_13k_100y.RData") 
-# save(rep_sim_strikes_25m_13k_100y, file = "rep_sim_strikes_25m_13k_100y.RData") 
-# save(rep_sim_strikes_50m_13k_100y, file = "rep_sim_strikes_50m_13k_100y.RData") 
-# save(rep_sim_strikes_10m_20k_100y, file = "rep_sim_strikes_10m_20k_100y.RData") 
-# save(rep_sim_strikes_25m_20k_100y, file = "rep_sim_strikes_25m_20k_100y.RData") 
-# save(rep_sim_strikes_50m_20k_100y, file = "rep_sim_strikes_50m_20k_100y.RData") 
-
-# save(prop_strikes_per_year_10m_13k_100y, file = "prop_strikes_per_year_10m_13k_100y.RData") 
-# save(prop_strikes_per_year_25m_13k_100y, file = "prop_strikes_per_year_25m_13k_100y.RData") 
-# save(prop_strikes_per_year_50m_13k_100y, file = "prop_strikes_per_year_50m_13k_100y.RData") 
-# save(prop_strikes_per_year_10m_20k_100y, file = "prop_strikes_per_year_10m_20k_100y.RData") 
-# save(prop_strikes_per_year_25m_20k_100y, file = "prop_strikes_per_year_25m_20k_100y.RData") 
-# save(prop_strikes_per_year_50m_20k_100y, file = "prop_strikes_per_year_50m_20k_100y.RData") 
-# #################################################################################
+save(rep_sim_strikes_10m_20k_1yr, file = "rep_sim_strikes_10m_20k_1yr.RData") 
+save(rep_sim_strikes_25m_20k_1yr, file = "rep_sim_strikes_25m_20k_1yr.RData") 
+save(rep_sim_strikes_50m_20k_1yr, file = "rep_sim_strikes_50m_20k_1yr.RData") 
+save(rep_sim_strikes_10m_20k_10yr, file = "rep_sim_strikes_10m_20k_10yr.RData") 
+save(rep_sim_strikes_25m_20k_10yr, file = "rep_sim_strikes_25m_20k_10yr.RData") 
+save(rep_sim_strikes_50m_20k_10yr, file = "rep_sim_strikes_50m_20k_10yr.RData") 
+save(rep_sim_strikes_10m_20k_50yr, file = "rep_sim_strikes_10m_20k_50yr.RData") 
+save(rep_sim_strikes_25m_20k_50yr, file = "rep_sim_strikes_25m_20k_50yr.RData") 
+save(rep_sim_strikes_50m_20k_50yr, file = "rep_sim_strikes_50m_20k_50yr.RData") 
+#################################################################################
 
 
 
 
 
 #  Number of iterations it takes to reach 1 strike
-nrep <- 100
+nrep <- 1000
+# break at 275*10 years 
 
 #  10m; 13k ship speed
-reach_1_strike_10m_13k <- as.vector(rep(0, nrep))
+reach_1_strike_10m_13k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
 
 for(j in 1:nrep){
     iter <- 0
-    while(TRUE){
+    for(i in 1:2750){
         iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 10)
-        if(sing_rep > 0) break
+        sing_rep[i] <- sim_ship_strike_fun_13k(strike_dist = 10)
+        if(sing_rep[i] > 0) break
       } 
-      reach_1_strike_10m_13k[j] <- iter
+      reach_1_strike_10m_13k_100rep[j] <- iter
     }
-
-#  10m; 20k ship speed
-reach_1_strike_10m_20k <- as.vector(rep(0, nrep))
-
-for(j in 1:nrep){
-    iter <- 0
-    while(TRUE){
-        iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 10)
-        if(sing_rep > 0) break
-      } 
-      reach_1_strike_10m_20k[j] <- iter
-    }
-
 
 #  25m; 13k ship speed
-reach_1_strike_25m_13k <- as.vector(rep(0, nrep))
+reach_1_strike_25m_13k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
 
 for(j in 1:nrep){
     iter <- 0
-    while(TRUE){
+    for(i in 1:2750){
         iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 25)
-        if(sing_rep > 0) break
+        sing_rep[i]<- sim_ship_strike_fun_13k(strike_dist = 25)
+        if(sing_rep[i] > 0) break
       } 
-      reach_1_strike_25m_13k[j] <- iter
+      reach_1_strike_25m_13k_100rep[j] <- iter
     }
-
-#  25m; 20k ship speed
-reach_1_strike_25m_20k <- as.vector(rep(0, nrep))
-
-for(j in 1:nrep){
-    iter <- 0
-    while(TRUE){
-        iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 25)
-        if(sing_rep > 0) break
-      } 
-      reach_1_strike_25m_20k[j] <- iter
-    }
-
 
 #  50m; 13k ship speed
-reach_1_strike_50m_13k <- as.vector(rep(0, nrep))
+reach_1_strike_50m_13k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
 
 for(j in 1:nrep){
     iter <- 0
-    while(TRUE){
+    for(i in 1:2750){
         iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_13k(mod = post_sims, strike_dist = 50)
-        if(sing_rep > 0) break
+        sing_rep[i] <- sim_ship_strike_fun_13k(strike_dist = 25)
+        if(sing_rep[i] > 0) break
       } 
-      reach_1_strike_50m_13k[j] <- iter
+      reach_1_strike_50m_13k_100rep[j] <- iter
+    }
+
+
+#  10m; 20k ship speed
+reach_1_strike_10m_20k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
+
+for(j in 1:nrep){
+    iter <- 0
+    for(i in 1:2750){
+        iter <-iter +1
+        sing_rep[i] <- sim_ship_strike_fun_20k(strike_dist = 10)
+        if(sing_rep[i] > 0) break
+      } 
+      reach_1_strike_10m_20k_100rep[j] <- iter
     }
 
 #  25m; 20k ship speed
-nrep <- 1000
-reach_1_strike_50m_20k <- as.vector(rep(0, nrep))
+reach_1_strike_25m_20k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
 
 for(j in 1:nrep){
     iter <- 0
-    while(TRUE){
+    for(i in 1:2750){
         iter <-iter +1
-        sing_rep <- sim_ship_strike_fun_20k(mod = post_sims, strike_dist = 50)
-        if(sing_rep > 0) break
+        sing_rep[i] <- sim_ship_strike_fun_20k(strike_dist = 25)
+        if(sing_rep[i] > 0) break
       } 
-      reach_1_strike_50m_20k[j] <- iter
+      reach_1_strike_25m_20k_100rep[j] <- iter
     }
+
+#  50m; 20k ship speed
+reach_1_strike_50m_20k_100rep <- as.vector(rep(NA, nrep))
+sing_rep <- as.vector(rep(0, 2750))
+
+for(j in 1:nrep){
+    iter <- 0
+    for(i in 1:2750){
+        iter <-iter +1
+        sing_rep[i] <- sim_ship_strike_fun_20k(strike_dist = 25)
+        if(sing_rep[i] > 0) break
+      } 
+      reach_1_strike_50m_20k_100rep[j] <- iter
+    }
+
 ################################################################################
 
-save(reach_1_strike_10m_13k, file = "reach_1_strike_10m_13k.RData")
-save(reach_1_strike_25m_13k, file = "reach_1_strike_25m_13k.RData")
-save(reach_1_strike_50m_13k, file = "reach_1_strike_50m_13k.RData") 
-save(reach_1_strike_10m_20k, file = "reach_1_strike_10m_20k.RData") 
-save(reach_1_strike_25m_20k, file = "reach_1_strike_25m_20k.RData") 
-save(reach_1_strike_50m_20k, file = "reach_1_strike_50m_20k.RData") 
+save(reach_1_strike_10m_13k_100rep, file = "reach_1_strike_10m_13k_100rep.RData")
+save(reach_1_strike_25m_13k_100rep, file = "reach_1_strike_25m_13k_100rep.RData")
+save(reach_1_strike_50m_13k_100rep, file = "reach_1_strike_50m_13k_100rep.RData")
+save(reach_1_strike_10m_20k_100rep, file = "reach_1_strike_10m_20k_100rep.RData")
+save(reach_1_strike_25m_20k_100rep, file = "reach_1_strike_25m_20k_100rep.RData")
+save(reach_1_strike_50m_20k_100rep, file = "reach_1_strike_50m_20k_100rep.RData")
+
+
+save(reach_1_strike_10m_13k_1000rep, file = "reach_1_strike_10m_13k_1000rep.RData")
+save(reach_1_strike_25m_13k_1000rep, file = "reach_1_strike_25m_13k_1000rep.RData")
+save(reach_1_strike_50m_13k_1000rep, file = "reach_1_strike_50m_13k_1000rep.RData")
+save(reach_1_strike_10m_20k_1000rep, file = "reach_1_strike_10m_20k_1000rep.RData")
+save(reach_1_strike_25m_20k_1000rep, file = "reach_1_strike_25m_20k_1000rep.RData")
+save(reach_1_strike_50m_20k_1000rep, file = "reach_1_strike_50m_20k_1000rep.RData")
 #################################################################################
 #################################################################################
 
@@ -281,47 +246,7 @@ save(reach_1_strike_50m_20k, file = "reach_1_strike_50m_20k.RData")
 
 
 
-# tot_sim_strikes_10m_13k_10y <- sum(rep_sim_strikes_10m_13k)
-# tot_sim_strikes_10m_20k_10y <- sum(rep_sim_strikes_10m_20k)
-# tot_sim_strikes_25m_13k_10y <- sum(rep_sim_strikes_25m_13k)
-# tot_sim_strikes_25m_20k_10y <- sum(rep_sim_strikes_25m_20k)
-# tot_sim_strikes_50m_13k_10y <- sum(rep_sim_strikes_50m_13k)
-# tot_sim_strikes_50m_20k_10y <- sum(rep_sim_strikes_50m_20k)
 
-# tot_sim_strikes_10m_13k_50y <- sum(rep_sim_strikes_10m_13k)
-# tot_sim_strikes_10m_20k_50y <- sum(rep_sim_strikes_10m_20k)
-# tot_sim_strikes_25m_13k_50y <- sum(rep_sim_strikes_25m_13k)
-# tot_sim_strikes_25m_20k_50y <- sum(rep_sim_strikes_25m_20k)
-# tot_sim_strikes_50m_13k_50y <- sum(rep_sim_strikes_50m_13k)
-# tot_sim_strikes_50m_20k_50y <- sum(rep_sim_strikes_50m_20k)
-
-# tot_sim_strikes_10m_13k_100y <- sum(rep_sim_strikes_10m_13k)
-# tot_sim_strikes_10m_20k_100y <- sum(rep_sim_strikes_10m_20k)
-# tot_sim_strikes_25m_13k_100y <- sum(rep_sim_strikes_25m_13k)
-# tot_sim_strikes_25m_20k_100y <- sum(rep_sim_strikes_25m_20k)
-# tot_sim_strikes_50m_13k_100y <- sum(rep_sim_strikes_50m_13k)
-# tot_sim_strikes_50m_20k_100y <- sum(rep_sim_strikes_50m_20k)
-
-# save(tot_sim_strikes_10m_13k_10y, file = "tot_sim_strikes_10m_13k_10y.RData") 
-# save(tot_sim_strikes_25m_13k_10y, file = "tot_sim_strikes_25m_13k_10y.RData") 
-# save(tot_sim_strikes_50m_13k_10y, file = "tot_sim_strikes_50m_13k_10y.RData") 
-# save(tot_sim_strikes_10m_20k_10y, file = "tot_sim_strikes_10m_20k_10y.RData") 
-# save(tot_sim_strikes_25m_20k_10y, file = "tot_sim_strikes_25m_20k_10y.RData") 
-# save(tot_sim_strikes_50m_20k_10y, file = "tot_sim_strikes_50m_20k_10y.RData") 
-
-# save(tot_sim_strikes_10m_13k_50y, file = "tot_sim_strikes_10m_13k_50y.RData") 
-# save(tot_sim_strikes_25m_13k_50y, file = "tot_sim_strikes_25m_13k_50y.RData") 
-# save(tot_sim_strikes_50m_13k_50y, file = "tot_sim_strikes_50m_13k_50y.RData") 
-# save(tot_sim_strikes_10m_20k_50y, file = "tot_sim_strikes_10m_20k_50y.RData") 
-# save(tot_sim_strikes_25m_20k_50y, file = "tot_sim_strikes_25m_20k_50y.RData") 
-# save(tot_sim_strikes_50m_20k_50y, file = "tot_sim_strikes_25m_20k_50y.RData") 
-
-# save(tot_sim_strikes_10m_13k_100y, file = "tot_sim_strikes_10m_13k_100y.RData") 
-# save(tot_sim_strikes_25m_13k_100y, file = "tot_sim_strikes_25m_13k_100y.RData") 
-# save(tot_sim_strikes_50m_13k_100y, file = "tot_sim_strikes_50m_13k_100y.RData") 
-# save(tot_sim_strikes_10m_20k_100y, file = "tot_sim_strikes_10m_20k_100y.RData") 
-# save(tot_sim_strikes_25m_20k_100y, file = "tot_sim_strikes_25m_20k_100y.RData") 
-# save(tot_sim_strikes_50m_20k_100y, file = "tot_sim_strikes_25m_20k_100y.RData") 
 
 
 
