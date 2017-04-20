@@ -325,14 +325,14 @@ cu_num_strikes_p <- ggplot()+
                                    geom_line(data=sim_strikes_50m_20k_1yr, aes(iter_num, cum_num_strikes), colour = "goldenrod2", size = 2) +
                                    #geom_path(aes(colour = as.numeric(date)))
                                    #geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +
-                                   xlab("\n Year") +
+                                   xlab("\n Iteration") +
                                    ylab("Cumulative number of strikes \n") +
                                    #xlim(c(0, 5)) +
                                    ylim(c(0, 300)) +
                                    theme_bw() +
                                    theme(panel.grid.minor = element_blank(), panel.grid.major.y = element_blank(), 
                                    axis.text = element_text(size = rel(2)), axis.title = element_text(size = rel(2))) 
-                                   #theme(legend.position="none")
+                                   theme(legend.position="right")
 cu_num_strikes_p
 
 
@@ -386,7 +386,22 @@ reach_1_strike_p
 # nrow(tst)
 # 218
 
-
+reach_1_strike_p <- ggplot() +
+                                  geom_point(data=reach_1_strike_10m_20k_df , aes(reach_1_strike_10m_13k_df $strikes), fill = "firebrick3", colour = "firebrick3") +
+                                  geom_density(data=reach_1_strike_25m_20k_df , aes(reach_1_strike_25m_13k_df $strikes), fill = "darkorange1", colour = "darkorange1") +
+                                  geom_density(data=reach_1_strike_50m_20k_df , aes(reach_1_strike_50m_13k_df $strikes), fill = "goldenrod2", colour = "goldenrod2") +
+                                  #geom_point(data = pt1, aes(x = x, y = y), colour="grey90", size = 1.5, shape = 19) +
+                                  #geom_density(size = 1.25) +
+                                  #geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +
+                                  xlab("\n Number of iterations to reach first encounter ") +
+                                  ylab("Density \n") +
+                                  xlim(c(0, 2749)) +
+                                  #ylim(c(0, 2.5)) +
+                                  theme_bw() +
+                                  theme(panel.grid.minor = element_blank(), panel.grid.major.y = element_blank(), 
+                                  axis.text = element_text(size = rel(2)), axis.title = element_text(size = rel(2))) 
+                                  #theme(legend.position="none")
+reach_1_strike_p
 
 
 
