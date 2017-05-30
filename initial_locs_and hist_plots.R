@@ -63,14 +63,14 @@ load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/rep_sim_st
 
 
 
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_10m_13k_100rep.RData")
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_25m_13k_100rep.RData")
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_50m_13k_100rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_10m_13k_1000rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_25m_13k_1000rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_50m_13k_1000rep.RData")
 
 
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_10m_20k_100rep.RData")
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_25m_20k_100rep.RData")
-load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_50m_20k_100rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_10m_20k_1000rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_25m_20k_1000rep.RData")
+load("C:/Users/sara.williams/Documents/GitHub/Whale-simulation/output/reach_1_strike_50m_20k_1000rep.RData")
 
 
 #### PLOTS ####
@@ -320,9 +320,9 @@ sim_strikes_50m_20k_1yr <- as.data.frame(rep_sim_strikes_50m_20k_1yr) %>%
 
 
 cu_num_strikes_p <- ggplot()+
-                                   geom_line(data=sim_strikes_10m_20k_1yr, aes(iter_num, cum_num_strikes), colour = "firebrick3", size = 2) +
-                                   geom_line(data=sim_strikes_25m_20k_1yr, aes(iter_num, cum_num_strikes), colour = "darkorange1", size = 2) +
-                                   geom_line(data=sim_strikes_50m_20k_1yr, aes(iter_num, cum_num_strikes), colour = "goldenrod2", size = 2) +
+                                   geom_line(data=sim_strikes_10m_13k_50yr, aes(iter_num, cum_num_strikes), colour = "firebrick3", size = 2, alpha = 0.4) +
+                                   #geom_line(data=sim_strikes_25m_13k_50yr, aes(iter_num, cum_num_strikes), colour = "darkorange1", size = 2, alpha = 0.4) +
+                                   geom_line(data=sim_strikes_50m_13k_50yr, aes(iter_num, cum_num_strikes), colour = "goldenrod2", size = 2, alpha = 0.4) +
                                    #geom_path(aes(colour = as.numeric(date)))
                                    #geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +
                                    xlab("\n Iteration") +
@@ -363,9 +363,9 @@ reach_1_strike_50m_20k_df <- as.data.frame(reach_1_strike_50m_20k_1000rep) %>%
 
 
 reach_1_strike_p <- ggplot() +
-                                  geom_density(data=reach_1_strike_10m_20k_df , aes(reach_1_strike_10m_13k_df $strikes), fill = "firebrick3", colour = "firebrick3") +
-                                  geom_density(data=reach_1_strike_25m_20k_df , aes(reach_1_strike_25m_13k_df $strikes), fill = "darkorange1", colour = "darkorange1") +
-                                  geom_density(data=reach_1_strike_50m_20k_df , aes(reach_1_strike_50m_13k_df $strikes), fill = "goldenrod2", colour = "goldenrod2") +
+                                  geom_density(data=reach_1_strike_10m_13k_df , aes(reach_1_strike_10m_13k_df $strikes), fill = "firebrick3", colour = "firebrick3", alpha = 0.6) +
+                                  #geom_density(data=reach_1_strike_25m_13k_df , aes(reach_1_strike_25m_13k_df $strikes), fill = "darkorange1", colour = "darkorange1", alpha = 0.6) +
+                                  geom_density(data=reach_1_strike_50m_13k_df , aes(reach_1_strike_50m_13k_df $strikes), fill = "goldenrod2", colour = "goldenrod2", alpha = 0.6) +
                                   #geom_point(data = pt1, aes(x = x, y = y), colour="grey90", size = 1.5, shape = 19) +
                                   #geom_density(size = 1.25) +
                                   #geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +
@@ -387,9 +387,9 @@ reach_1_strike_p
 # 218
 
 reach_1_strike_p <- ggplot() +
-                                  geom_point(data=reach_1_strike_10m_20k_df , aes(reach_1_strike_10m_13k_df $strikes), fill = "firebrick3", colour = "firebrick3") +
-                                  geom_density(data=reach_1_strike_25m_20k_df , aes(reach_1_strike_25m_13k_df $strikes), fill = "darkorange1", colour = "darkorange1") +
-                                  geom_density(data=reach_1_strike_50m_20k_df , aes(reach_1_strike_50m_13k_df $strikes), fill = "goldenrod2", colour = "goldenrod2") +
+                                  geom_density(data=reach_1_strike_10m_20k_df , aes(reach_1_strike_10m_20k_df $strikes), fill = "firebrick3", colour = "firebrick3", alpha = 0.6) +
+                                  #geom_density(data=reach_1_strike_25m_20k_df , aes(reach_1_strike_25m_20k_df $strikes), fill = "darkorange1", colour = "darkorange1", alpha = 0.6) +
+                                  geom_density(data=reach_1_strike_50m_20k_df , aes(reach_1_strike_50m_20k_df $strikes), fill = "goldenrod2", colour = "goldenrod2", alpha = 0.6) +
                                   #geom_point(data = pt1, aes(x = x, y = y), colour="grey90", size = 1.5, shape = 19) +
                                   #geom_density(size = 1.25) +
                                   #geom_vline(aes(xintercept=mean(strikes)), color="black", linetype="dashed", size=1) +

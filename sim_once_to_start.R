@@ -1,6 +1,6 @@
 # Sara Williams
 # 3/18/2017
-# Whale ship strike risk simulation - things that need to be run once first before running 
+# Whale ship strike risk simulation - set up code that need to be run once first before running 
 #   simulation funciton
 ################################################################################
 
@@ -35,6 +35,7 @@ track2 <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/survey_t
 ################################################################################
 
 #  Load functions
+#  wrapped cauchy distribution
 rwcauchy <- function(n, mu = 0, rho = 0) {
   u = runif(n)
   V = cos(2 * pi * u)
@@ -43,23 +44,21 @@ rwcauchy <- function(n, mu = 0, rho = 0) {
   return(t)
 }
 
+# Fcuntion to generate relative probability of whale occurence for each grid cell
+probsel <- function(probrast, ni){
+                    x <- getValues(probrast)
+                    x[is.na(x)] <- 0
+                    vec_cells <- seq(1:length(probrast))
+                    samp <- sample(vec_cells,  ni, replace = F, prob=x)
+                    samprast <- raster(probrast)
+                    samprast[samp] <- 1 
+                    samp_pts <- rasterToPoints(samprast, fun = function(x){x > 0})
+                    samp_pts <- SpatialPoints(samp_pts)
+                    crs(samp_pts) <- UTM
+                    return(samp_pts)
+                    }
 
- #  Place the number of initial whales (ni) in grid cells based on the predicted density of that cells used as probabilities
-              #   Sample ni initial locations for whales using the relative probability of each grid cell
-              probsel <- function(probrast, ni){
-                                                x <- getValues(probrast)
-                                                x[is.na(x)] <- 0
-                                                vec_cells <- seq(1:length(probrast))
-                                                samp <- sample(vec_cells,  ni, replace = F, prob=x)
-                                                samprast <- raster(probrast)
-                                                samprast[samp] <- 1 
-                                                samp_pts <- rasterToPoints(samprast, fun = function(x){x > 0})
-                                                samp_pts <- SpatialPoints(samp_pts)
-                                                crs(samp_pts) <- UTM
-                                                return(samp_pts)
-              }
-
-#   Generate probability for each grid cell from relative predicted density
+#   Assign relative probability from each grid cell from relative predicted density
 sa <- predgrid_plot %>%
          dplyr::select(X, Y, Nhat) 
 sa_rast <- rasterFromXYZ(sa)
@@ -106,7 +105,7 @@ all_track_df_down$new_ID <- all_track_df_down %>% group_indices(id)
 
 #  Generate simulated step lengths and turn angles for whale movements from parameter 
 #   estimate posterior distritbutions from movement analysis
-#   Currently using single movement mode with all data model!!!!
+#   Currently using single movement mode with all data model
 niter <- 11000
 nsamp <- 5000
  
