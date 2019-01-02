@@ -25,13 +25,13 @@ library(maptools)
 
 #  Load data
 # Load output from MCMC posterior distribtuion iterations (JAGS object)
-load("C:/Users/sara.williams/Documents/GitHub/Whale-Simulation/data_files/single_fit_dive.RData")
-load("C:/Users/sara.williams/Documents/GitHub/Whale-Simulation/data_files/predgrid_plot.RData")
-segs_sm <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/obs_and_segs_dat/segment_centroids_2008on_sm_sst")
-s_big2 <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/study_and_survey_area/SEAK_bound_small")
-s2 <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/study_and_survey_area/survey_area")
-track2 <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/survey_tracks/survey_lines_2008on")
-#obssegs_1k_sm <- shapefile("C:/Users/sara.williams/Desktop/Whale-DSM-misc/data/obs_and_segs_dat/obs_segs_2008on_1k_sm_2_14_2")
+load("C:/Users/saraw/Documents/GitHub/Whale-Simulation/data_files/single_fit_dive.RData")
+load("C:/Users/saraw/Documents/GitHub/Whale-Simulation/data_files/predgrid_plot.RData")
+segs_sm <- shapefile("C:/Users/saraw/Desktop/Whale-DSM-misc/data/obs_and_segs_dat/segment_centroids_2008on_sm_sst")
+s_big2 <- shapefile("C:/Users/saraw/Desktop/Whale-DSM-misc/data/study_and_survey_area/SEAK_bound_small")
+s2 <- shapefile("C:/Users/saraw/Desktop/Whale-DSM-misc/data/study_and_survey_area/survey_area")
+track2 <- shapefile("C:/Users/saraw/Desktop/Whale-DSM-misc/data/survey_tracks/survey_lines_2008on")
+#obssegs_1k_sm <- shapefile("C:/Users/saraw/Desktop/Whale-DSM-misc/data/obs_and_segs_dat/obs_segs_2008on_1k_sm_2_14_2")
 ################################################################################
 
 #  Load functions

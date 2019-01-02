@@ -7,7 +7,13 @@ library(gridExtra)
 library(ggthemes)
 ################################################################################
 
-
+#  Take the short interspout interval turn/step length data only (for now) and start the whale at the 
+#  black dot, i.e., at a position that it will be at same place at same time as the ship in 180 seconds.  
+#  Then set it loose with the assumption that it will (1) act like your movement model mode based on
+#  short interval throughout the 180 second period and (2) that each turn is independent, i.e., if after 
+#  the first time step, the whale has turned X degrees, then the probability of its next movement is 
+#  independent of its first...(this may be important because we may want to assume that if it turned 
+#  right the first turn then the next turn it will continue right....or not)
 
 #   Number of movement paths
 npath <- 10000
